@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenida</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> 
+</head>
+<body>
+    <header>
+        <h1>Bienvenido, {{ user.username }}!</h1> <!-- Mostrar el nombre de usuario -->
+    </header>
+
+    <main>
+        <p>Estamos encantados de verte de nuevo.</p>
+        <p>¿Qué te gustaría hacer hoy?</p>
+
+        <nav>
+            <ul>
+                <li><a href="/usuarios/migrations/static/templates/usuarios_activos.html">Ver Usuarios Activos</a></li>
+                <li><a href="/usuarios/migrations/static/templates/despedida.html">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Sistema de Usuarios. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

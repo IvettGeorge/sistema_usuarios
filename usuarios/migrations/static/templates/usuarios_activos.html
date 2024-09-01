@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios Activos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> <!-- Enlace al archivo CSS si existe -->
+</head>
+<body>
+    <header>
+        <h1>Usuarios Activos</h1>
+    </header>
+
+    <main>
+        {% if usuarios_activos %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre de Usuario</th>
+                        <th>Nombre Completo</th> <!-- Opcional -->
+                        <th>Correo Electrónico</th> <!-- Opcional -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios_activos %}
+                        <tr>
+                            <td>{{ usuario.username }}</td>
+                            <td>{{ usuario.first_name }} {{ usuario.last_name }}</td> <!-- Opcional -->
+                            <td>{{ usuario.email }}</td> <!-- Opcional -->
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay usuarios activos en este momento.</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 202
