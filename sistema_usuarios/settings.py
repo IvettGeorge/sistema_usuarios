@@ -12,18 +12,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-import os  # Asegúrate de importar el módulo os
+import os  
 
-# Obtén la ruta del directorio base del proyecto
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-#BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-35$5okqj1%uoo3i6f$1$#0nffa6%k!m*j@cznp9j^vkrb14!wr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -141,5 +133,6 @@ LOGIN_REDIRECT_URL = 'bienvenida'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',  
+    'usuarios.backends.EmailBackend',
 )
 
