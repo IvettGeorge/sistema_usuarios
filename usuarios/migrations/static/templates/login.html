@@ -48,9 +48,7 @@
     {% if messages %}
     <div class="messages">
         {% for message in messages %}
-            <p class="{{ message.success }}">{{ message }}</p>
-            <p class="{{ message.erorr }}">{{ message }}</p>
-            <p class="{{ message.warning }}">{{ message }}</p>
+            <p class="{{ message.tags }}">{{ message }}</p>
         {% endfor %}
     </div>
 {% endif %}
