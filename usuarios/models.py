@@ -26,6 +26,7 @@ class Usuario(AbstractBaseUser):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15, unique=True)
     username = models.CharField(max_length=30, unique=True)
+    id = models.AutoField(primary_key=True)
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)

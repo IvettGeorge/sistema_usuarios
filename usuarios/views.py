@@ -16,6 +16,9 @@ from django.shortcuts import render, redirect
 import random
 import string
 from django.contrib.auth import authenticate, login as auth_login
+from .models import Usuario
+from django.db import connection
+
 
 
 
@@ -48,6 +51,10 @@ def registro(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, 'El email ya está en uso.')
             return redirect('registro')
+
+        
+        if not (8 <= len(password) <= 64):
+            return redirect('registro')
         
         username = generate_unique_username()
 
@@ -67,18 +74,25 @@ def registro(request):
 def usuarios_activos(request):
     try:
         sesiones_activas = Session.objects.filter(expire_date__gte=timezone.now())
-        
         usuarios_id = [session.get_decoded().get('_auth_user_id') for session in sesiones_activas if session.get_decoded().get('_auth_user_id')]
-
-        usuarios_activos = Usuario.objects.filter(id__in=usuarios_id)
-        
+        usuarios_id = [int(id) for id in usuarios_id] 
+        print("1111112 ",usuarios_id )
+        usuarios_activos = User.objects.filter(id__in=usuarios_id)
+        print("Aquiiiii: ", connection.queries[-1]['sql'])
+        print("333 ",usuarios_activos )
         messages.info(request, 'Lista de usuarios activos actualizada.')
 
+
+        
+
     except Exception as e:
-        messages.error(request, f'Error al obtener usuarios activos: {e}')
+        print( f'Error al obtener usuarios activos: {e}' )
         usuarios_activos = []
 
     return render(request, 'usuarios_activos.html', {'usuarios_activos': usuarios_activos})
+
+
+    
 
 def login(request):
     if request.method == 'POST':
